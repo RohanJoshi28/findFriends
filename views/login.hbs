@@ -1,0 +1,25 @@
+<head>
+    <meta charset="utf-8">
+    <style>
+        #invalid-message{
+            color: red;
+        }
+    </style>
+    <link rel="stylesheet" href="/stylesheets/login.css"/>
+</head>
+<h1>Welcome to Find Friends</h1>
+<p>Login to see your friends and find new friends</p>
+{{#if invalid}}
+    <p id="invalid-message">Invalid username or password</p>
+{{/if}}
+<form action="/finder", method="POST">
+    <label for="name">Your name</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="name">Your password</label><br>
+    <input type="text" id="password" name="password"><br>
+    <label for="log in">Log in</label>
+    <input type="radio" id="log in", name="account" value="log in">
+    <label for="sign up">Sign up</label>
+    <input type="radio" id="sign up" name="account" value="sign up"><br>
+    <input type="submit" value="Submit">
+</form>

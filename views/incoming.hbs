@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/stylesheets/finder.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1>Current requests sent</h1>
+        {{#each req_sent}}
+            <p class="person">{{this}}</p>
+        {{/each}}
+
+        <h1>Current Requests incoming</h1>
+        <form action="/accept">
+        {{#each req_inc}}
+            <p class="person">{{this}}</p>
+            <input type="checkbox" name="{{this}}" id="{{this}}"><br>
+        {{/each}}
+        <input type="hidden" name="person" id="person" value="{{person}}">
+        <input type="hidden" name="name" id="name" value="{{name}}">
+        <input type="hidden" name="password" id="password" value="{{password}}">
+        <br><div style="text-align: center;"><input type="submit" value="Accept friends"></div>
+        </form>
+
+        <p class="above-back">If you don't want to accept any of these friend requests, you can go back to the main page</p>
+        <form action="/finder", method="POST">
+            <input type="hidden" name="name" id="name" value="{{name}}">
+            <input type="hidden" name="password" id="password" value="{{password}}">
+            <br><div style="text-align: center;"><input type="submit" value="Back to Main"></div>
+        </form>
+    </body>
+</html>

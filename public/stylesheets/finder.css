@@ -1,0 +1,61 @@
+.person{
+    border: 3px solid black;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    font-size: 1.3em;
+    color:darkblue;
+    background-color:bisque;
+    margin-top: 10px;
+}
+
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+    font-size: 1.2em;
+    background-color: cadetblue;
+}
+
+h1, h2{
+    text-align: center;
+    border: 2px dashed gold;
+}
+
+form .person{
+    display: inline;   
+    padding-right: 400px;
+    padding-left: 400px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"]{
+    font-size: 0.9em; 
+    border-radius: 8px;
+    padding: 5px;
+    background-color:bisque;
+    text-align: center;
+}
+
+input[type="checkbox"]{
+    width: 30px;
+    height: 30px;
+}
+
+.input[value="Back to Main"]{
+    margin-top: -2px;
+    padding-top: -2px;
+}
+
+.above-back{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    padding-top: 20px;
+}
+
+p{
+    text-align: center;
+}

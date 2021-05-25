@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/stylesheets/finder.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h2>Your friend requests have been sent</h2>
+        <p>Your friend requests have been sent to the people you check marked. If they 
+            accept your friend request, they will be added to your list of friends, and 
+            you will have expanded your social circle. 
+        </p>
+        <p class="above-back">Go Back to Main Page</p>
+        <form action="/finder", method="POST">
+            <input type="hidden" name="name" id="name" value="{{name}}">
+            <input type="hidden" name="password" id="password" value="{{password}}">
+            <br><div style="text-align: center;"><input type="submit" value="Back to Main"></div>
+        </form><br>
+        <img src="https://images.pexels.com/photos/536/road-street-sign-way.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="200" width="300" class="image">
+    </body>
+</html>

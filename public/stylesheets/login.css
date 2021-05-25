@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.7em;
+    width: 40%;
+    height: 40%;
+    margin: auto auto;
+    margin-top: 70px;
+    background-color:bisque;
+}
+
+html{
+    background-color:darkcyan;
+}
