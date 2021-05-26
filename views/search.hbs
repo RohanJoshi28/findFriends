@@ -6,7 +6,7 @@
     <body>
     <h1>Names found</h1>
     <div>
-        <form action="/sent">
+        <form action="/sent", method="POST">
             {{#each found}}
                 <p class="person">{{this}}</p>
                 <input type="checkbox" name="{{this}}" id="{{this}}"><br>
