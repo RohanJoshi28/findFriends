@@ -30,7 +30,7 @@ router.post('/', function(req, res, sent){
 
     friend_reqs[person.split(" ")[0]]["Sent"] = Array.prototype.concat(friend_reqs[person.split(" ")[0]]["Sent"], friend_reqs_on)
 
-    fs.writeFile("C:/Users/ajosh/findFriends/findFriends/public/javascripts/user_data.json", JSON.stringify(friend_reqs), function(err){
+    fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(friend_reqs), function(err){
         if (err){throw err};
     });
 
