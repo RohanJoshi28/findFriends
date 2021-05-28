@@ -7,8 +7,19 @@ body{
     margin: auto auto;
     margin-top: 70px;
     background-color:bisque;
+    margin-bottom: 40px;
 }
 
 html{
     background-color:darkcyan;
+}
+
+input[type="submit"]{
+    font-size: 0.9em; 
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:whitesmoke;
+    text-align: center;
 }
