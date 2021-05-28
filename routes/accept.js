@@ -50,7 +50,7 @@ router.get("/", function(req,res,next){
     }
 
     //write the new json file to memory
-    fs.writeFile("C:/Users/ajosh/findFriends/findFriends/public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
+    fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
         if (err){throw err};
     });
 
