@@ -6,6 +6,15 @@
         }
     </style>
     <link rel="stylesheet" href="/stylesheets/login.css"/>
+    <script>
+        function removeFields(){
+            document.getElementById("sign_up_fields").innerHTML="";
+            return;
+        }
+        function loadFields(){
+            document.getElementById("sign_up_fields").innerHTML="<br><label for='phone'>Enter your phone number</label><input type='text' name='phone' id='phone'><br><br> <label for='bio'>Put your interests here</label> <textarea id='bio' name='bio' rows='4' cols='50'></textarea><br>";
+        }
+    </script>
 </head>
 <h1>Welcome to Find Friends</h1>
 <p>Login to see your friends and find new friends</p>
@@ -17,9 +26,12 @@
     <input type="text" id="name" name="name"><br>
     <label for="name">Your password</label><br>
     <input type="text" id="password" name="password"><br>
+    <div id="sign_up_fields">
+
+    </div>
     <label for="log in">Log in</label>
-    <input type="radio" id="log in", name="account" value="log in">
+    <input type="radio" id="log in", name="account" value="log in" onclick="removeFields()">
     <label for="sign up">Sign up</label>
-    <input type="radio" id="sign up" name="account" value="sign up"><br>
+    <input type="radio" id="sign up" name="account" value="sign up", onclick="loadFields()"><br>
     <input type="submit" value="Submit">
 </form>
