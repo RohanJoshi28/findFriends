@@ -7,14 +7,14 @@
     <h1>Current Friend</h1>
     <div>
         {{#each friends}}
-           <p class="person">{{this}}</p>
+           <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
         {{/each}}
     </div>
     <h1>Friend Recommendation</h1>
     <div>
         <form action="/sent", method="POST">
             {{#each friendRecs}}
-                <p class="person">{{this}}</p>
+                <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
                 <input type="checkbox" name="{{this}}" id="{{this}}"><br>
             {{/each}}
             <input type="hidden" id="person" name="person" value="{{person}}">

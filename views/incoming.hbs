@@ -2,17 +2,18 @@
 <html>
     <head>
         <link href="/stylesheets/finder.css" rel="stylesheet" type="text/css">
+
     </head>
     <body>
         <h1>Current requests sent</h1>
         {{#each req_sent}}
-            <p class="person">{{this}}</p>
+            <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
         {{/each}}
 
         <h1>Current Requests incoming</h1>
         <form action="/accept">
         {{#each req_inc}}
-            <p class="person">{{this}}</p>
+            <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
             <input type="checkbox" name="{{this}}" id="{{this}}"><br>
         {{/each}}
         <input type="hidden" name="person" id="person" value="{{person}}">

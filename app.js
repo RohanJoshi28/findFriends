@@ -12,6 +12,7 @@ var sentRouter = require('./routes/sent');
 var incomingRouter = require("./routes/incoming");
 var acceptRouter = require("./routes/accept");
 var searchRouter = require("./routes/search");
+var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/sent', sentRouter);
 app.use('/incoming', incomingRouter);
 app.use('/accept', acceptRouter);
 app.use("/search", searchRouter);
+app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
