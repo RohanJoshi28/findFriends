@@ -39,7 +39,10 @@ router.post('/', function(req, res, next) {
       //simply render the friends and the friend recommendations
       var username = req.body.username
       var password = req.body.password;
-      res.render('finder', {username:username, password:password, friends: findFriends([username]), friendRecs: getRecs(username)});
+      getRecs(username).then(function(result){
+        res.render('finder', {username:username, password:password, friends: findFriends([username]), friendRecs: result});
+      })
+      
   }
 });
 
