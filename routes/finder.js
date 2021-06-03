@@ -18,16 +18,16 @@ fs.readFile("./public/javascripts/user_data.json", (err, data)=>{
 /* GET home page. */
 router.post('/', function(req, res, next) {
   //find the friends of the person who has logged in
-  response = findFriends([req.body.name])
+  response = findFriends([req.body.username])
 
   //if the person who logged in doesn't exist, tell the user that they entered the wrong username/password
-  if (response===undefined || user_data[req.body.name]["Password"]!=req.body.password){
+  if (response===undefined || user_data[req.body.username]["Password"]!=req.body.password){
     if (req.body.account==="log in"){
       res.render("login", {invalid: true})  
     } else if (req.body.account=="sign up"){
 
         //one reason the user does not exist is because they decided to sign up, so create a new database entry
-        var new_login_info = req.body.name;
+        var new_login_info = req.body.username;
         user_data[new_login_info] = {"Friends": [], "Password": req.body.password, "Sent": [], "Recieved": [], "Phone": req.body.phone, "Bio": req.body.bio};
         fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
           if (err){ throw err}
@@ -37,9 +37,9 @@ router.post('/', function(req, res, next) {
     }
   } else {
       //simply render the friends and the friend recommendations
-      var info = req.body.name;
-      var info_pass = req.body.name + " " + req.body.password;
-      res.render('finder', { person: info_pass, friends: findFriends([info]), friendRecs: getRecs(info)});
+      var username = req.body.username
+      var password = req.body.password;
+      res.render('finder', {username:username, password:password, friends: findFriends([username]), friendRecs: getRecs(username)});
   }
 });
 

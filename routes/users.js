@@ -12,8 +12,8 @@ fs.readFile("./public/javascripts/user_data.json", (err, data)=>{
 router.get('/:person', function(req, res, next) {
   var person = req.params.person;
   var bio = user_data[person].Bio;
-  console.log(bio);
   var phone = user_data[person].Phone;
+  
   res.render("users", {name: person, bio: bio, phone: phone});
 });
 

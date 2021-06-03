@@ -17,19 +17,22 @@
                 <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
                 <input type="checkbox" name="{{this}}" id="{{this}}"><br>
             {{/each}}
-            <input type="hidden" id="person" name="person" value="{{person}}">
+            <input type="hidden" id="username" name="username" value="{{username}}">
+            <input type="hidden" id="password" name="password" value="{{password}}">
             <br>
             <div style="text-align: center;"><input type="submit" id="submit" value="Send Friend Request"></div>
         </form>
     </div>
     <p>You can also see incoming friend requests in order to accept them</p>
     <form action="/incoming", method="POST">
-        <input type="hidden" id="person" name="person" value="{{person}}">
+        <input type="hidden" id="username" name="username" value="{{username}}">
+        <input type="hidden" id="password" name="password" value="{{password}}">
         <div style="text-align: center;"><input type="submit" id="submit" value="See incoming requests"></div>
     </form>
     <p>Finally, you can also search for users in order to send them friend requests</p>
     <form action="/search", method="POST">
-        <input type="hidden" id="person" name="person" value="{{person}}">  
+        <input type="hidden" id="username" name="username" value="{{username}}">
+        <input type="hidden" id="password" name="password" value="{{password}}">
         <div style="text-align: center;"><input type="text" id="person_part" name="person_part"></div><br>
         <div style="text-align: center;"><input type="submit" id="submit" value="Search for Friends"></div>
     </form>

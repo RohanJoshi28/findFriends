@@ -10,18 +10,19 @@ fs.readFile("./public/javascripts/user_data.json", (err, data)=>{
 router = express.Router();
 router.post('/', function(req, res, next){
     //getting the current user and checking that their username corresponds with their password
-    var person = req.body.person;
-    if (person.split(" ")[1] != user_data[person.split(" ")[0]]["Password"]){
+    var username = req.body.username;
+    var password = req.body.password;
+    if (password != user_data[username]["Password"]){
         res.send("Not a valid username or password")
         return;
     }
 
     //looking at incoming requests and sent requests
-    var requests_sent = user_data[person.split(" ")[0]].Sent;
-    var incoming_reqs = user_data[person.split(" ")[0]].Recieved;
+    var requests_sent = user_data[username].Sent;
+    var incoming_reqs = user_data[username].Recieved;
 
     //displaying the incoming and sent requests to the user 
-    res.render("incoming", {name: person.split(" ")[0], password: person.split(" ")[1], person: person, req_sent: requests_sent, req_inc: incoming_reqs});
+    res.render("incoming", {username: username, password: password, req_sent: requests_sent, req_inc: incoming_reqs});
 
 });
 

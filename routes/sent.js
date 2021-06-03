@@ -16,10 +16,11 @@ router.post('/', function(req, res, sent){
     var query = req.body;
 
     //the person who sent that post request
-    var person = query.person;
+    var username = query.username;
+    var password = query.password;
 
     //make sure the username and password in the post request are correct
-    if (friend_reqs[person.split(" ")[0]]["Password"]!==person.split(" ")[1]){
+    if (friend_reqs[username]["Password"]!==password){
         res.send("Invalid Request, not correct password");
         return;
     } 
@@ -34,19 +35,19 @@ router.post('/', function(req, res, sent){
     for (var i=0; i<req_queries.length; i++){
 
         //if the query key is "person", it is irrelevant. 
-        if (req_queries[i]==="person"){
+        if (req_queries[i]==="username" || req_queries[i]==="password"){
             continue;
         //The inputs for friend request form are checkboxes, so each is either on or off
         } else if (query[req_queries[i]]==="on"){
             //if the user sent a friend request to that person, so append that person to var friend_reqs_on
             friend_reqs_on.push(req_queries[i])
             //The person who this friend request was sent to adds the user to their "Recieved" list
-            friend_reqs[req_queries[i]]["Recieved"].push(person.split(" ")[0]);
+            friend_reqs[req_queries[i]]["Recieved"].push(username);
         }
     }
 
     //All the people the user has sent friend requests to are added to the users "Sent" list
-    friend_reqs[person.split(" ")[0]]["Sent"] = Array.prototype.concat(friend_reqs[person.split(" ")[0]]["Sent"], friend_reqs_on)
+    friend_reqs[username]["Sent"] = Array.prototype.concat(friend_reqs[username]["Sent"], friend_reqs_on)
 
     //update the main user data json file
     fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(friend_reqs), function(err){
@@ -54,7 +55,7 @@ router.post('/', function(req, res, sent){
     });
 
     //render the page where the website tells the user friend requests have been sent successfully
-    res.render("sent", {name: person.split(" ")[0], password: person.split(" ")[1]});
+    res.render("sent", {username: username, password: password});
     
 });
 

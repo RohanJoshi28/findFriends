@@ -11,20 +11,19 @@
         {{/each}}
 
         <h1>Current Requests incoming</h1>
-        <form action="/accept">
+        <form action="/accept", method="POST">
         {{#each req_inc}}
             <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
             <input type="checkbox" name="{{this}}" id="{{this}}"><br>
         {{/each}}
-        <input type="hidden" name="person" id="person" value="{{person}}">
-        <input type="hidden" name="name" id="name" value="{{name}}">
+        <input type="hidden" name="username" id="username" value="{{username}}">
         <input type="hidden" name="password" id="password" value="{{password}}">
         <br><div style="text-align: center;"><input type="submit" value="Accept friends"></div>
         </form>
 
         <p class="above-back">If you don't want to accept any of these friend requests, you can go back to the main page</p>
         <form action="/finder", method="POST">
-            <input type="hidden" name="name" id="name" value="{{name}}">
+            <input type="hidden" name="username" id="username" value="{{username}}">
             <input type="hidden" name="password" id="password" value="{{password}}">
             <br><div style="text-align: center;"><input type="submit" value="Back to Main"></div>
         </form>
