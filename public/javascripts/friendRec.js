@@ -8,16 +8,19 @@ fs.readFile("./public/javascripts/user_data.json", (err, data)=>{
   user_data = JSON.parse(data);
 })
 
-async function findSimilarity(username, text1, text2, model){
+//function to take in biography 1, biography 2, and the nlp model to return similarity
+async function findSimilarity(text1, text2, model){
     doc1 = await model(text1);
     doc2 = await model(text2)
     similarity = await doc1.similarity(doc2);
     return similarity;
 }
 
+//asynchronus friend recommendation function
 async function friendRecs(person){
     
     var friend_recs = [];
+
     //get the current friends of the person
     current_friends = getFriends(person);
 
@@ -43,17 +46,24 @@ async function friendRecs(person){
         }
     }
 
+    //load the nlp model
     const model = spacy.default.load("en_core_web_sm");
+
+    //the user's biography
     var person_bio = user_data[person].Bio;
+
+    //the similarities between user's biography and the recommended friends' biography
     var similarities = [];
 
+    //iterates over each of the friends to find the similarity between the user and the friend to append it
     for (var friend=0; friend<friend_recs.length; friend++){
         friend_bio = user_data[friend_recs[friend]].Bio;
         
-        similarity = await findSimilarity(friend_recs[friend], person_bio, friend_bio, model);
+        similarity = await findSimilarity(person_bio, friend_bio, model);
         similarities.push(similarity);
     }
 
+    //sorts the recommended friends based on the similarities from largest to smallest, using insertion sort
     for (var i=0; i<similarities.length; i++){
         for (var j=i+1; j<similarities.length; j--){
             if (similarities[i]<similarities[j]){
@@ -69,6 +79,8 @@ async function friendRecs(person){
             }
         }
     }
+
+    //returns recommended friends
     return friend_recs;
 
 }
