@@ -69,7 +69,6 @@ async function friendRecs(person){
             }
         }
     }
-    console.log(similarities);
     return friend_recs;
 
 }
