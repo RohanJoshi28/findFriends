@@ -8,10 +8,26 @@ fs.readFile("./public/javascripts/user_data.json", (err, data)=>{
   user_data = JSON.parse(data);
 })
 
+async function simplifyDoc(doc){
+    for (var token of doc.tokens){
+        if (token.isStop!==undefined){
+            if (token.isStop===true){
+                token.textWithWs = "";
+            } else{
+                token.textWithWs = token.textWithWs.replace(token.text, token.lemma);
+            }
+        }
+    }
+}
+
 //function to take in biography 1, biography 2, and the nlp model to return similarity
 async function findSimilarity(text1, text2, model){
     doc1 = await model(text1);
     doc2 = await model(text2)
+
+    await simplifyDoc(doc1);
+    await simplifyDoc(doc2);
+
     similarity = await doc1.similarity(doc2);
     return similarity;
 }
@@ -58,7 +74,7 @@ async function friendRecs(person){
     //iterates over each of the friends to find the similarity between the user and the friend to append it
     for (var friend=0; friend<friend_recs.length; friend++){
         friend_bio = user_data[friend_recs[friend]].Bio;
-        
+
         similarity = await findSimilarity(person_bio, friend_bio, model);
         similarities.push(similarity);
     }
