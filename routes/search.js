@@ -20,6 +20,8 @@ router.post("/", function(req, res, next){
     var username = req.body.username;
     var password = req.body.password;
 
+    var person = user_data[username];
+
     //the user's search (its usually a part of a username or a full username)
     var part = req.body.person_part;
 
@@ -33,7 +35,7 @@ router.post("/", function(req, res, next){
     for (var i=0; i<names.length; i++){
 
         //if the name corresponds to the user's search (For example "Rohan" corresponds to "Ro")
-        if (names[i].toLowerCase().includes(part.toLowerCase()) && names[i]!==username && !(current_friends.includes(names[i]))){
+        if (names[i].toLowerCase().includes(part.toLowerCase()) && names[i]!==username && !(current_friends.includes(names[i])) && !(person.Recieved.includes(names[i])) && !(person.Sent.includes(names[i]))){
             //add the name to the names that correspond with the search for display to the user
             names_found.push(names[i]);
         }

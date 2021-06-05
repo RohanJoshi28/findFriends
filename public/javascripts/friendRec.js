@@ -37,6 +37,8 @@ async function friendRecs(person){
     
     var friend_recs = [];
 
+    var person_info = user_data[person];
+
     //get the current friends of the person
     current_friends = getFriends(person);
 
@@ -53,7 +55,7 @@ async function friendRecs(person){
                 possible_friend = new_friends[next_friend];
 
                 //check if those friends are the original person or the original person's friends
-                if (possible_friend!==person && !(current_friends.includes(possible_friend)) && !(friend_recs.includes(possible_friend))){
+                if (possible_friend!==person && !(current_friends.includes(possible_friend)) && !(friend_recs.includes(possible_friend)) && !(person_info.Sent.includes(possible_friend)) && !(person_info.Recieved.includes(possible_friend))){
 
                     //if not, then you can add that friend to recommendations
                     friend_recs.push(possible_friend);
