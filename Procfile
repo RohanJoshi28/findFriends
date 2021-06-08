@@ -1,2 +1,3 @@
-web: (python node_modules/spacy/api/server.py &) && (npm start &)
+web: npm start
+worker: python node_modules/spacy/api/server.py
 
