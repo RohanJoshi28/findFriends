@@ -1,2 +1,2 @@
-web: (python node_modules/spacy/api/server.py &) && (npm start &)
+web: (python node\_modules/spacy/api/server.py &) && (npm start &)
 
