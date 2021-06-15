@@ -4,6 +4,15 @@
         <link href="/stylesheets/finder.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+    <span id="profile" onclick='document.getElementById("edit_bio").submit();'>Click here to view your profile</span>
+
+    <!--This form is hidden, to be used when the user clicks on "view profile" -->
+    <form id = "edit_bio", action="/users" method="POST">
+        <input type="hidden" name="username" value="{{username}}">
+        <input type="hidden" name="password" value="{{password}}">
+    </form>
+
+    </form>
     <h1>Current Friend</h1>
     <div>
         {{#each friends}}

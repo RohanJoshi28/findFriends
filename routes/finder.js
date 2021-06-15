@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 
         //one reason the user does not exist is because they decided to sign up, so create a new database entry
         var new_login_info = req.body.username;
-        user_data[new_login_info] = {"Friends": [], "Password": req.body.password, "Sent": [], "Recieved": [], "Phone": req.body.phone, "Bio": req.body.bio};
+        user_data[new_login_info] = {"Friends": [], "Password": req.body.password, "Sent": [], "Recieved": [], "Phone": req.body.phone, "Bio": req.body.bio, "Posts": []};
         fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
           if (err){ throw err}
           else {console.log("added user")}

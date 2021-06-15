@@ -4,18 +4,49 @@
         <meta charset="utf-8">
         <link href="/stylesheets/finder.css" rel="stylesheet">
         <link href="/stylesheets/users.css", rel="stylesheet">
+
+        <style>
+
+        </style>
     </head>
     <body>
-        <h1>{{name}}</h1>
+        <h1>{{username}}</h1>
 
         <div class="phone">
         <h2>Phone Number</h2>
         <p>{{phone}}</p>
         </div>
 
-        <div class="bio">
+        <div class="bio", id="bio">
         <h2>My Interests</h2>
         <p>{{bio}}</p>
         </div>
+        <input type="hidden" id="username" name="username" value="{{username}}">
+        <input type="hidden" id="password" name="password" value="{{password}}">
+        <script>
+            function form_bio(){
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                document.getElementById("bio").innerHTML = `
+                <h1>Edit your user bio</h1>
+                <form action="/users" method="POST" name="update_bio">
+                    <input type="hidden" id="username" name="username" value="${username}">
+                    <input type="hidden" id="password" name="password" value="${password}">
+                    <input type="hidden" id="update" name="update" value="update">
+                    <div style="text-align: center;">
+                    <textarea id="bio" name="bio", rows="10", cols="50">{{bio}}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                    <input type="submit" id="submit" value="Save">
+                    </div>
+                </form>`
+                document.getElementById("edit_bio").remove();
+            }
+        </script>
+
+        {{#if self}}
+            <div style="text-align: center;"><button type="button" id="edit_bio", onclick="form_bio();">Edit your Bio</button></div>
+        {{/if}}
+
     </body>
 </html>
