@@ -6,10 +6,34 @@
         <link href="/stylesheets/users.css", rel="stylesheet">
 
         <style>
+            .centered, h4{
+                text-align: center;
+            }
 
+            h4{
+                margin-top: 60px;
+            }
+
+            .post_text{
+                background-color: bisque; 
+                border: 8px solid black;
+                padding: 80px;  
+            }
+
+            form{
+                margin-top: 30px;
+            }
         </style>
     </head>
     <body>
+        {{#if edit}}
+        <form action="/finder" method="POST"> 
+            <input type="hidden" name="username" value="{{username}}" >
+            <input type="hidden" name="password" value="{{password}}">
+            <input type="submit" name="back_to_main" value="Back to Main">
+        </form>
+        {{/if}}
+
         <h1>{{username}}</h1>
 
         <div class="phone">
@@ -21,12 +45,14 @@
         <h2>My Interests</h2>
         <p>{{bio}}</p>
         </div>
-        <input type="hidden" id="username" name="username" value="{{username}}">
-        <input type="hidden" id="password" name="password" value="{{password}}">
+        <input type="hidden" id="name" name="name" value="{{username}}">
+        <input type="hidden" id="passcode" name="passcode" value="{{password}}">
         <script>
+
+            //to render the form to update the biography
             function form_bio(){
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
+                var username = document.getElementById("name").value;
+                var password = document.getElementById("passcode").value;
                 document.getElementById("bio").innerHTML = `
                 <h1>Edit your user bio</h1>
                 <form action="/users" method="POST" name="update_bio">
@@ -44,9 +70,45 @@
             }
         </script>
 
-        {{#if self}}
+        {{#if edit}}
             <div style="text-align: center;"><button type="button" id="edit_bio", onclick="form_bio();">Edit your Bio</button></div>
+
+        <!-- create a new post -->
+        <h4>Create a new post for your profile</h4>
+        <form action="/users" method="POST" name="deletePost">
+            <input type="hidden" name="create" value="create">
+            <input type="hidden" id = "username" name="username" value="{{username}}">
+            <input type="hidden" id = "password" name="password" value="{{password}}">
+            
+            <div class="centered"><textarea id="new_post" name="new_post", rows="10", cols="50"></textarea></div>
+            <div class="centered"><input type="submit" name="create_post" value="Create Post"></div>
+        </form>
         {{/if}}
 
+        <!-- displays the user's posts -->
+        <div id="past_posts">
+
+            {{#each posts}}
+
+                <div>
+                    <h4>Post</h4>
+                    <p class="post_text">{{this}}</p>
+                </div>
+                {{#if ../edit}}
+                    <div style="text-align: center;">
+                    <form action="/users" method="POST">
+                        <input type="hidden" name="username" value="{{../username}}">
+                        <input type="hidden" name="password" value="{{../password}}">
+                        <input type="hidden" name="delete" value="delete">
+                        <input type="hidden" name="post_num" value="{{@index}}">
+                        <input type="submit" name="delete_post" value="Delete Post">
+                    </form>
+                    </div>
+                {{/if}}
+
+            {{/each}}
+
+        </div>
+        
     </body>
-</html>
+</html> 
