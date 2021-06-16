@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/finder.css">
+    <style>
+        p{
+            margin-left: 100px;
+            margin-right: 100px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{post_username}}:</h1>
+    <div style="text-align: center;"><h4>{{post_text}}</h4></div>
+    {{#each comments}}
+        <p class="person">{{this}}</p>
+    {{/each}}
+    <p style="text-align: center;">Write your comment here</p>
+    <form action="/post" method="POST">
+        <div style="text-align: center;"><textarea rows=10 cols=50 name="new_comment"></textarea></div>
+        <input type="hidden" name="post_username" value="{{post_username}}">
+        <input type="hidden" name="post_id" value="{{post_id}}">
+        <div style="text-align: center;"><input type="submit" value="Save"></div>
+    </form>
+</body>
+</html>

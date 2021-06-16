@@ -2,14 +2,20 @@
 <html>
     <head>
     <link rel="stylesheet" href="/stylesheets/finder.css">
+    <style>
+
+    </style>
     </head>
     <body>
+
     <h1>Names found</h1>
     <div>
         <form action="/sent", method="POST">
             {{#each found}}
+
                 <p class="person" onclick="location.href='users/{{this}}';">{{this}}</p>
                 <input type="checkbox" name="{{this}}" id="{{this}}"><br>
+                
             {{/each}}
             <input type="hidden" id="username" name="username" value="{{username}}">
             <input type="hidden" id="password" name="password" value="{{password}}">

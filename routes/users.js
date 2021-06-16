@@ -14,6 +14,13 @@ fs.readFile("./public/javascripts/post_id.json", (err, data)=>{
   post_data = JSON.parse(data);
 })
 
+//read the data for all comments in the database
+var comments_data;
+fs.readFile("./public/javascripts/comments.json", (err, data)=>{
+  comments_data = JSON.parse(data);
+})
+
+
 function get_post_text (posts) {
   var post_text = []
   for (var i=0; i<posts.length; i++){
@@ -28,16 +35,14 @@ router.get('/:person', function(req, res, next) {
 
   // get the information from user data and display it
   var username = req.params.person;
-  console.log(username);
   var bio = user_data[username].Bio;
   var phone = user_data[username].Phone;
   var posts = user_data[username].Posts; 
-  console.log(user_data[username]);
 
   var post_text = get_post_text(posts);
-  console.log(post_text);
-  
+
   res.render("users", {username: username, bio: bio, phone: phone, posts: post_text, edit: false});
+
 });
 
 //if the user is looking at their own profile
@@ -45,11 +50,10 @@ router.post("/", function(req, res, next){
 
   //get the username and password to validate it
   var username = req.body.username; 
-  console.log(req.body.username);
-  console.log(req.body);
+
   var password = req.body.password;
   var bio = user_data[username].Bio;
-  console.log(bio);
+
   var phone = user_data[username].Phone;
   var posts = user_data[username].Posts;
   var post_text = get_post_text(posts);
@@ -84,11 +88,18 @@ router.post("/", function(req, res, next){
     post_data[current_id] = new_post;
     post_data["current_post_id"]+=1;
 
+    //new comment thread
+    comments_data[current_id] = [];
+
     fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
       if (err){throw err};
     });
 
     fs.writeFile("./public/javascripts/post_id.json", JSON.stringify(post_data), function(err){
+      if (err){throw err};
+    });
+
+    fs.writeFile("./public/javascripts/comments.json", JSON.stringify(comments_data), function(err){
       if (err){throw err};
     });
 
@@ -111,11 +122,17 @@ router.post("/", function(req, res, next){
     user_data[username].Posts.splice(post_num, 1);
     delete post_data[post_id];
 
+    delete comments_data[post_id];
+
     fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
       if (err){throw err};
     });
 
     fs.writeFile("./public/javascripts/post_id.json", JSON.stringify(post_data), function(err){
+      if (err){throw err};
+    });
+
+    fs.writeFile("./public/javascripts/comments.json", JSON.stringify(comments_data), function(err){
       if (err){throw err};
     });
 

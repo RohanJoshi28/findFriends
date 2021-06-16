@@ -12,6 +12,8 @@
 
             h4{
                 margin-top: 60px;
+                color: blue;
+                text-decoration: underline; 
             }
 
             .post_text{
@@ -22,6 +24,11 @@
 
             form{
                 margin-top: 30px;
+            }
+
+            .new_post_title{
+                color: black;
+                text-decoration: none;
             }
         </style>
     </head>
@@ -74,7 +81,7 @@
             <div style="text-align: center;"><button type="button" id="edit_bio", onclick="form_bio();">Edit your Bio</button></div>
 
         <!-- create a new post -->
-        <h4>Create a new post for your profile</h4>
+        <h4 class="new_post_title">Create a new post for your profile</h4>
         <form action="/users" method="POST" name="deletePost">
             <input type="hidden" name="create" value="create">
             <input type="hidden" id = "username" name="username" value="{{username}}">
@@ -89,9 +96,15 @@
         <div id="past_posts">
 
             {{#each posts}}
+                <!-- form to go to the post page --> 
+                <form id="go_to_post" action="/post" method="POST">
+                    <!-- I use the "username" input later on in another form so I don't want to reuse it -->
+                    <input type="hidden" name="post_username" value="{{../username}}">
+                    <input type="hidden" name="index" value="{{@index}}">
+                </form>
 
                 <div>
-                    <h4>Post</h4>
+                    <h4 onclick="document.getElementById('go_to_post').submit();">Post {{@index}}</h4>
                     <p class="post_text">{{this}}</p>
                 </div>
                 {{#if ../edit}}
