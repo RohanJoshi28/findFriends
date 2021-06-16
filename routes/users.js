@@ -122,8 +122,10 @@ router.post("/", function(req, res, next){
     user_data[username].Posts.splice(post_num, 1);
     delete post_data[post_id];
 
+    //delete the comments of that post
     delete comments_data[post_id];
 
+    //write the new data to the user_data, post_id, and comments_data json files
     fs.writeFile("./public/javascripts/user_data.json", JSON.stringify(user_data), function(err){
       if (err){throw err};
     });
